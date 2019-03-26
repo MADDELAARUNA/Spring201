@@ -1,5 +1,5 @@
 node {
-def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+def mvnHome = tool name: 'M2_HOME', type: 'maven'
 stage('Checkout') {
 checkout([$class: 'GitSCM', 
 branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false,
