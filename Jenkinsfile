@@ -1,5 +1,6 @@
 node {
 def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+stages{
 stage('checkout') {
 checkout([$class: 'GitSCM', 
 branches: [[name: '*/master']], 
@@ -12,3 +13,4 @@ stage('Build') {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
    }
    }
+}
