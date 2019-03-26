@@ -9,10 +9,6 @@ url: 'https://github.com/MADDELAARUNA/Spring201.git']]])
 }
 stage('Build') {
       // Run the maven build
-      if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
-      } else {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
-      }
    }
    }
