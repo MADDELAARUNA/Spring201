@@ -1,4 +1,3 @@
-
 node {
 
 def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
