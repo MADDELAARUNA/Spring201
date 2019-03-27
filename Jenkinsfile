@@ -3,7 +3,7 @@ def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
 def rtMaven = Artifactory.newMavenBuild()
 def buildinfo = Artifactory.newBuildInfo()
 def server = Artifactory.server 'Artifactory'
-      
+
       
 stage('Checkout') {
 checkout([$class: 'GitSCM', 
@@ -13,7 +13,7 @@ url: 'https://github.com/MADDELAARUNA/Spring201.git']]])
 }
 stage('Build') {
       // Run the maven build
-rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
+rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildinfo
    }
        stage('---------- SonarQube Analysis --------------') {
   withSonarQubeEnv('Sonarqube') {
