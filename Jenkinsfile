@@ -2,6 +2,7 @@ node {
 def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
 def rtMaven = Artifactory.newMavenBuild()
 def buildinfo = Artifactory.newBuildInfo()
+def server = Artifactoy.server 'Artifactory'
       
 stage('Checkout') {
 checkout([$class: 'GitSCM', 
