@@ -1,5 +1,6 @@
 node {
 def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+      
 stage('Checkout') {
 checkout([$class: 'GitSCM', 
 branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false,
@@ -11,7 +12,6 @@ stage('Build') {
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
    }
        stage('---------- SonarQube Analysis --------------') {
-  def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
   withSonarQubeEnv('Sonarqube') {
    sh "${mvnHome}/bin/mvn -f '$branch/$projectToBuild/' sonar:sonar"
   }
