@@ -10,5 +10,11 @@ stage('Build') {
       // Run the maven build
          bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
    }
+       stage('---------- SonarQube Analysis --------------') {
+  def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+  withSonarQubeEnv('Sonarqube') {
+   sh "${mvnHome}/bin/mvn -f '$branch/$projectToBuild/' sonar:sonar"
+  }
+ }
    }
 
