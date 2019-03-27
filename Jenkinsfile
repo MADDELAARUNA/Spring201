@@ -13,7 +13,7 @@ stage('Build') {
    }
        stage('---------- SonarQube Analysis --------------') {
   withSonarQubeEnv('Sonarqube') {
-   bat(/"${mvnHome}\bin\mvn -f sonar:sonar"/)
+   bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore sonar:sonar/)
   }
  }
    }
