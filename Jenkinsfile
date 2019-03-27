@@ -1,9 +1,9 @@
 node {
 def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
 def rtMaven = Artifactory.newMavenBuild()
-def buildinfo = Artifactory.newBuildInfo()
 def server = Artifactory.server 'Artifactory'
-
+buildInfo = Artifactory.newBuildInfo()
+buildInfo.env.capture = true
       
 stage('Checkout') {
 checkout([$class: 'GitSCM', 
@@ -13,7 +13,7 @@ url: 'https://github.com/MADDELAARUNA/Spring201.git']]])
 }
 stage('Build') {
       // Run the maven build
-rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildinfo
+rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
    }
        stage('---------- SonarQube Analysis --------------') {
   withSonarQubeEnv('Sonarqube') {
@@ -24,8 +24,7 @@ rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildinfo
   rtMaven.tool = 'MAVEN_HOME' // Tool name from Jenkins configuration
   rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
   rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
-  buildInfo = Artifactory.newBuildInfo()
-  buildInfo.env.capture = true
+ 
  }    
    }
 
