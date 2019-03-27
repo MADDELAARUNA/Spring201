@@ -13,7 +13,7 @@ stage('Build') {
    }
        stage('---------- SonarQube Analysis --------------') {
   withSonarQubeEnv('Sonarqube') {
-   sh "${mvnHome}/bin/mvn -f '$branch/$projectToBuild/' sonar:sonar"
+   sh "${mvnHome}/bin/mvn -f sonar:sonar"
   }
  }
    }
