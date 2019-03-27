@@ -13,7 +13,7 @@ url: 'https://github.com/MADDELAARUNA/Spring201.git']]])
 }
 stage('Build') {
       // Run the maven build
-         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+rtMaven.run pom: branch + '/' + projectToBuild + '/pom.xml', goals: 'clean install', buildInfo: buildInfo
    }
        stage('---------- SonarQube Analysis --------------') {
   withSonarQubeEnv('Sonarqube') {
